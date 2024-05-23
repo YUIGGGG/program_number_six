@@ -132,4 +132,4 @@ class TVControl:
 if __name__ == "__main__":
     root = tk.Tk()
     tv_control = TVControl(root)
-    root.mainloop()
+    root.mainloop() 
