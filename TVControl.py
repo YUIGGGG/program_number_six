@@ -73,11 +73,8 @@ class TVControl:
         self.update_labels()
 
     def turn_on_tv1(self):
-        try:
-            self.tv1.turnOn()
-            self.update_labels()
-        except ValueError as e:
-            print("Error:", e)
+        self.tv1.turnOn()
+        self.update_labels()
 
     def turn_off_tv1(self):
         self.tv1.turnOff()
@@ -97,4 +94,42 @@ class TVControl:
 
     def tv1_volume_down(self):
         self.tv1.volumeDown()
-        self.update
+        self.update_labels()
+
+    def turn_on_tv2(self):
+        self.tv2.turnOn()
+        self.update_labels()
+
+    def turn_off_tv2(self):
+        self.tv2.turnOff()
+        self.update_labels()
+
+    def tv2_channel_up(self):
+        self.tv2.channelUp()
+        self.update_labels()
+
+    def tv2_channel_down(self):
+        self.tv2.channelDown()
+        self.update_labels()
+
+    def tv2_volume_up(self):
+        self.tv2.volumeUp()
+        self.update_labels()
+
+    def tv2_volume_down(self):
+        self.tv2.volumeDown()
+        self.update_labels()
+
+    def update_labels(self):
+        self.tv1_status_label.config(text=f"Status: {'On' if self.tv1.on else 'Off'}")
+        self.tv1_channel_label.config(text=f"Channel: {self.tv1.getChannel()}")
+        self.tv1_volume_label.config(text=f"Volume: {self.tv1.getVolume()}")
+
+        self.tv2_status_label.config(text=f"Status: {'On' if self.tv2.on else 'Off'}")
+        self.tv2_channel_label.config(text=f"Channel: {self.tv2.getChannel()}")
+        self.tv2_volume_label.config(text=f"Volume: {self.tv2.getVolume()}")
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    tv_control = TVControl(root)
+    root.mainloop()
