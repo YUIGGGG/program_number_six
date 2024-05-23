@@ -1,101 +1,126 @@
 import tkinter as tk
+from TV import TV
 
-class TV:
-    def __init__(self):
-        self.channel = 1
-        self.volumeLevel = 1
-        self.on = False
+class TVControl:
+    def __init__(self, root):
+        self.tv1 = TV()
+        self.tv2 = TV()
 
-    def turnOn(self):
-        self.on = True
+        root.title("TV Control")
 
-    def turnOff(self):
-        self.on = False
+        # TV1 Controls
+        self.tv1_label = tk.Label(root, text="TV1")
+        self.tv1_label.grid(row=0, column=0, padx=10, pady=10)
 
-    def getChannel(self):
-        return self.channel
+        self.tv1_channel_label = tk.Label(root, text="Channel: 1")
+        self.tv1_channel_label.grid(row=1, column=0, padx=10, pady=5)
 
-    def setChannel(self, channel):
-        if self.on and 1 <= channel <= 120:
-            self.channel = channel
+        self.tv1_volume_label = tk.Label(root, text="Volume: 1")
+        self.tv1_volume_label.grid(row=2, column=0, padx=10, pady=5)
 
-    def getVolume(self):
-        return self.volumeLevel
+        self.tv1_on_button = tk.Button(root, text="Turn On", command=self.turn_on_tv1)
+        self.tv1_on_button.grid(row=3, column=0, padx=10, pady=5)
 
-    def setVolume(self, volumeLevel):
-        if self.on and 1 <= volumeLevel <= 7:
-            self.volumeLevel = volumeLevel
+        self.tv1_off_button = tk.Button(root, text="Turn Off", command=self.turn_off_tv1)
+        self.tv1_off_button.grid(row=4, column=0, padx=10, pady=5)
 
-    def channelUp(self):
-        if self.on and self.channel < 120:
-            self.channel += 1
+        self.tv1_channel_up_button = tk.Button(root, text="Channel Up", command=self.tv1_channel_up)
+        self.tv1_channel_up_button.grid(row=5, column=0, padx=10, pady=5)
 
-    def channelDown(self):
-        if self.on and self.channel > 1:
-            self.channel -= 1
+        self.tv1_channel_down_button = tk.Button(root, text="Channel Down", command=self.tv1_channel_down)
+        self.tv1_channel_down_button.grid(row=6, column=0, padx=10, pady=5)
 
-    def volumeUp(self):
-        if self.on and self.volumeLevel < 7:
-            self.volumeLevel += 1
+        self.tv1_volume_up_button = tk.Button(root, text="Volume Up", command=self.tv1_volume_up)
+        self.tv1_volume_up_button.grid(row=7, column=0, padx=10, pady=5)
 
-    def volumeDown(self):
-        if self.on and self.volumeLevel > 1:
-            self.volumeLevel -= 1
+        self.tv1_volume_down_button = tk.Button(root, text="Volume Down", command=self.tv1_volume_down)
+        self.tv1_volume_down_button.grid(row=8, column=0, padx=10, pady=5)
 
-class TVControllerApp:
-    def __init__(self, master):
-        self.master = master
-        self.tv = TV()
+        # TV2 Controls
+        self.tv2_label = tk.Label(root, text="TV2")
+        self.tv2_label.grid(row=0, column=1, padx=10, pady=10)
 
-        # Create buttons for different actions
-        self.on_button = tk.Button(master, text="Turn On", command=self.turn_on)
-        self.on_button.pack(pady=5)
+        self.tv2_channel_label = tk.Label(root, text="Channel: 1")
+        self.tv2_channel_label.grid(row=1, column=1, padx=10, pady=5)
 
-        self.off_button = tk.Button(master, text="Turn Off", command=self.turn_off)
-        self.off_button.pack(pady=5)
+        self.tv2_volume_label = tk.Label(root, text="Volume: 1")
+        self.tv2_volume_label.grid(row=2, column=1, padx=10, pady=5)
 
-        self.channel_up_button = tk.Button(master, text="Channel Up", command=self.channel_up)
-        self.channel_up_button.pack(pady=5)
+        self.tv2_on_button = tk.Button(root, text="Turn On", command=self.turn_on_tv2)
+        self.tv2_on_button.grid(row=3, column=1, padx=10, pady=5)
 
-        self.channel_down_button = tk.Button(master, text="Channel Down", command=self.channel_down)
-        self.channel_down_button.pack(pady=5)
+        self.tv2_off_button = tk.Button(root, text="Turn Off", command=self.turn_off_tv2)
+        self.tv2_off_button.grid(row=4, column=1, padx=10, pady=5)
 
-        self.volume_up_button = tk.Button(master, text="Volume Up", command=self.volume_up)
-        self.volume_up_button.pack(pady=5)
+        self.tv2_channel_up_button = tk.Button(root, text="Channel Up", command=self.tv2_channel_up)
+        self.tv2_channel_up_button.grid(row=5, column=1, padx=10, pady=5)
 
-        self.volume_down_button = tk.Button(master, text="Volume Down", command=self.volume_down)
-        self.volume_down_button.pack(pady=5)
+        self.tv2_channel_down_button = tk.Button(root, text="Channel Down", command=self.tv2_channel_down)
+        self.tv2_channel_down_button.grid(row=6, column=1, padx=10, pady=5)
 
-    def turn_on(self):
-        self.tv.turnOn()
-        tk.messagebox.showinfo("TV Status", "TV turned on")
+        self.tv2_volume_up_button = tk.Button(root, text="Volume Up", command=self.tv2_volume_up)
+        self.tv2_volume_up_button.grid(row=7, column=1, padx=10, pady=5)
 
-    def turn_off(self):
-        self.tv.turnOff()
-        tk.messagebox.showinfo("TV Status", "TV turned off")
+        self.tv2_volume_down_button = tk.Button(root, text="Volume Down", command=self.tv2_volume_down)
+        self.tv2_volume_down_button.grid(row=8, column=1, padx=10, pady=5)
 
-    def channel_up(self):
-        self.tv.channelUp()
-        tk.messagebox.showinfo("Channel Changed", f"Current channel: {self.tv.getChannel()}")
+        self.update_labels()
 
-    def channel_down(self):
-        self.tv.channelDown()
-        tk.messagebox.showinfo("Channel Changed", f"Current channel: {self.tv.getChannel()}")
+    def turn_on_tv1(self):
+        self.tv1.turnOn()
+        self.update_labels()
 
-    def volume_up(self):
-        self.tv.volumeUp()
-        tk.messagebox.showinfo("Volume Changed", f"Current volume level: {self.tv.getVolume()}")
+    def turn_off_tv1(self):
+        self.tv1.turnOff()
+        self.update_labels()
 
-    def volume_down(self):
-        self.tv.volumeDown()
-        tk.messagebox.showinfo("Volume Changed", f"Current volume level: {self.tv.getVolume()}")
+    def tv1_channel_up(self):
+        self.tv1.channelUp()
+        self.update_labels()
 
-# Create the main application window
-root = tk.Tk()
-root.title("TV Controller")
+    def tv1_channel_down(self):
+        self.tv1.channelDown()
+        self.update_labels()
 
-# Initialize the TV Controller App
-app = TVControllerApp(root)
+    def tv1_volume_up(self):
+        self.tv1.volumeUp()
+        self.update_labels()
 
-# Run the Tkinter event loop
-root.mainloop()
+    def tv1_volume_down(self):
+        self.tv1.volumeDown()
+        self.update_labels()
+
+    def turn_on_tv2(self):
+        self.tv2.turnOn()
+        self.update_labels()
+
+    def turn_off_tv2(self):
+        self.tv2.turnOff()
+        self.update_labels()
+
+    def tv2_channel_up(self):
+        self.tv2.channelUp()
+        self.update_labels()
+
+    def tv2_channel_down(self):
+        self.tv2.channelDown()
+        self.update_labels()
+
+    def tv2_volume_up(self):
+        self.tv2.volumeUp()
+        self.update_labels()
+
+    def tv2_volume_down(self):
+        self.tv2.volumeDown()
+        self.update_labels()
+
+    def update_labels(self):
+        self.tv1_channel_label.config(text=f"Channel: {self.tv1.getChannel()}")
+        self.tv1_volume_label.config(text=f"Volume: {self.tv1.getVolume()}")
+        self.tv2_channel_label.config(text=f"Channel: {self.tv2.getChannel()}")
+        self.tv2_volume_label.config(text=f"Volume: {self.tv2.getVolume()}")
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    tv_control = TVControl(root)
+    root.mainloop()
