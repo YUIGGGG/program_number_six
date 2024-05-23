@@ -1,21 +1,22 @@
-from TV import TV  # Import the TV class
+from TV import TV
 
 def main():
-    tv1 = TV()  # First object
-    tv1.turnOn()  # Turns on tv1
-    tv1.setChannel(30)  # Set the channel to 30
-    tv1.setVolume(3)  # Set the volume level to 3
+    tv1 = TV()
+    tv1.turnOn()
+    try:
+        tv1.setChannel(130)  # Invalid channel
+    except ValueError as e:
+        print("Error:", e)
 
-    tv2 = TV()  # Second object
-    tv2.turnOn()  # Turns on tv2
-    tv2.setChannel(3)  # Set the channel to 3
-    tv2.setVolume(2)  # Set the volume level to 2
+    try:
+        tv1.setVolume(10)  # Invalid volume level
+    except ValueError as e:
+        print("Error:", e)
 
-    # Print the channel and volume level of tv1
-    print("tv1's channel is", tv1.getChannel(), "and volume level is", tv1.getVolume())
-
-    # Print the channel and volume level of tv2
-    print("tv2's channel is", tv2.getChannel(), "and volume level is", tv2.getVolume())
+    try:
+        tv1.channelDown()  # Should not change channel when TV is off
+    except ValueError as e:
+        print("Error:", e)
 
 if __name__ == "__main__":
-    main()  # Call the main function to execute the program
+    main()

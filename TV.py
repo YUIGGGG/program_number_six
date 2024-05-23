@@ -16,6 +16,8 @@ class TV:
     def setChannel(self, channel):
         if self.on and 1 <= channel <= 120:
             self.channel = channel
+        else:
+            raise ValueError("Channel must be between 1 and 120 when TV is on.")
 
     def getVolume(self):
         return self.volume_level
@@ -23,6 +25,8 @@ class TV:
     def setVolume(self, volume_level):
         if self.on and 1 <= volume_level <= 7:
             self.volume_level = volume_level
+        else:
+            raise ValueError("Volume level must be between 1 and 7 when TV is on.")
 
     def channelUp(self):
         if self.on and self.channel < 120:
